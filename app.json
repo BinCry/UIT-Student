@@ -2,7 +2,7 @@
   "expo": {
     "name": "UIT Student",
     "slug": "uit-portal-mobile",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -11,7 +11,7 @@
         "expo-splash-screen",
         {
           "backgroundColor": "#FFFFFF",
-          "image": "./assets/startup-logo.png",
+          "image": "./assets/splash-blank.png",
           "imageWidth": 260,
           "resizeMode": "contain"
         }
@@ -22,7 +22,7 @@
     },
     "android": {
       "package": "vn.edu.uit.student",
-      "versionCode": 101,
+      "versionCode": 102,
       "adaptiveIcon": {
         "backgroundColor": "#FFFFFF",
         "foregroundImage": "./assets/adaptive-icon.png"
