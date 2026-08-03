@@ -89,8 +89,8 @@ if (!buildGradle.includes('signingConfigs.release')) {
 }
 
 buildGradle = buildGradle.replace(
-  /release\s*\{([\s\S]*?)signingConfig signingConfigs\.debug/,
-  `release {$1signingConfig keystorePropertiesFile.exists() ? signingConfigs.release : signingConfigs.debug`
+  /(buildTypes\s*\{[\s\S]*?release\s*\{[\s\S]*?^\s*)signingConfig\s+.*$/m,
+  `$1signingConfig keystorePropertiesFile.exists() ? signingConfigs.release : signingConfigs.debug`
 );
 
 fs.writeFileSync(buildGradlePath, buildGradle);
