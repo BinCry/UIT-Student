@@ -1,6 +1,6 @@
 {
   "name": "uit-portal-mobile",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.ts",
   "dependencies": {
     "expo": "^54.0.36",
@@ -18,7 +18,9 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "build:android": "npx eas-cli build --platform android --profile production",
+    "build:android:local": "npx eas-cli build --platform android --profile production --local"
   },
   "private": true
 }
