@@ -1,9 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { useEffect, useRef, useState } from 'react';
-import { BackHandler, Platform, SafeAreaView, StyleSheet } from 'react-native';
+import {
+  BackHandler,
+  Platform,
+  SafeAreaView,
+  StatusBar as NativeStatusBar,
+  StyleSheet,
+} from 'react-native';
 import { WebView, type WebViewNavigation } from 'react-native-webview';
 
 import { portalUrl } from './src/config/portalUrl';
+
+const androidStatusBarHeight =
+  Platform.OS === 'android' ? NativeStatusBar.currentHeight ?? 0 : 0;
 
 export default function App() {
   const webViewRef = useRef<WebView>(null);
@@ -34,7 +43,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="auto" />
+      <ExpoStatusBar style="auto" />
       <WebView
         ref={webViewRef}
         source={{ uri: sourceUri }}
@@ -65,6 +74,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingTop: androidStatusBarHeight,
   },
   webView: {
     flex: 1,
