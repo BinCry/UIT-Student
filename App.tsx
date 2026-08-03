@@ -23,9 +23,13 @@ const STARTUP_MINIMUM_MS = 1500;
 export default function App() {
   const webViewRef = useRef<WebView>(null);
   const hasHiddenNativeSplashRef = useRef(false);
+  const hasMarkedAppReadyRef = useRef(false);
+  const minimumVisibleUntilRef = useRef(Date.now() + STARTUP_MINIMUM_MS);
   const [canGoBack, setCanGoBack] = useState(false);
+  const [isInitialPageLoaded, setIsInitialPageLoaded] = useState(false);
   const [isStartupScreenVisible, setIsStartupScreenVisible] = useState(true);
   const [sourceUri, setSourceUri] = useState(portalUrl);
+  const isAppReady = isInitialPageLoaded;
 
   useEffect(() => {
     if (Platform.OS !== 'android') {
@@ -50,14 +54,24 @@ export default function App() {
   }, [canGoBack]);
 
   useEffect(() => {
+    if (!isStartupScreenVisible || !isAppReady) {
+      return;
+    }
+
+    const remaining = minimumVisibleUntilRef.current - Date.now();
+    if (remaining <= 0) {
+      setIsStartupScreenVisible(false);
+      return;
+    }
+
     const timeoutId = setTimeout(() => {
       setIsStartupScreenVisible(false);
-    }, STARTUP_MINIMUM_MS);
+    }, remaining);
 
     return () => {
       clearTimeout(timeoutId);
     };
-  }, []);
+  }, [isAppReady, isStartupScreenVisible]);
 
   useEffect(() => {
     if (isStartupScreenVisible || hasHiddenNativeSplashRef.current) {
@@ -77,6 +91,15 @@ export default function App() {
     void SplashScreen.hideAsync();
   };
 
+  const markAppReady = () => {
+    if (hasMarkedAppReadyRef.current) {
+      return;
+    }
+
+    hasMarkedAppReadyRef.current = true;
+    setIsInitialPageLoaded(true);
+  };
+
   return (
     <View style={styles.root}>
       <ExpoStatusBar style={isStartupScreenVisible ? 'dark' : 'auto'} />
@@ -94,6 +117,9 @@ export default function App() {
               setSourceUri(targetUrl);
             }
           }}
+          onLoadEnd={markAppReady}
+          onError={markAppReady}
+          onHttpError={markAppReady}
           javaScriptEnabled
           domStorageEnabled
           sharedCookiesEnabled
