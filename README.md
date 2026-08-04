@@ -1,4 +1,6 @@
-# UIT Student
+<div align="center">
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0F172A,45:1D4ED8,100:22C55E&height=220&section=header&text=UIT+Student+App&fontSize=48&fontColor=F8FAFC&animation=fadeIn&fontAlignY=35&desc=University+of+Information+Technology&descAlignY=55&descSize=18" alt="header" />
+</div>
 
 <div align="center">
   <img src="./assets/startup-logo.png" alt="UIT Student logo" width="120" />
