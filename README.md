@@ -102,3 +102,7 @@ Lưu ý:
 ## Giấy phép
 
 Dự án được phát hành theo [MIT License](./LICENSE).
+
+<p align="center">
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:312E81,50:6366F1,100:C4B5FD&height=155&section=footer&text=THANK%20FOR%20TAKING%20THE%20TIME%20TO%20STOP%20BY&fontSize=24&fontColor=FFFFFF&animation=twinkling&fontAlignY=72&desc=END.&descSize=14&descAlignY=88" alt="THANK FOR TAKING THE TIME TO STOP BY " />
+</p>
